@@ -1,9 +1,1 @@
-new Promise((resolve,reject)=>{
- reject('adf')
-}).then((val)=>{
-    console.log(val)
-},
-(reason)=>{
-    console.log(reason)
-}
-)
+console.log(Boolean(Number("7897adf")))
