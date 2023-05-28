@@ -46,6 +46,7 @@ function sendCode(phone, templateCode) {//向用户发送验证码 @templateCode
                 })
             }
         }).catch((err)=>{
+            console.log(err)
             reject("验证码发送失败")                         //阿里云服务器报错发送失败
         })
     })

@@ -2,10 +2,12 @@ var  randPassWord=require("./randPassWord")
 
 var excuteSql=require('./excuteSql')
 
+let Base64 = require('js-base64').Base64
+
 function rigist(phone){ //将用户信息插入数据库
    var userName="user"+String(phone).slice(7,11)
 
-   var params=[phone,userName,randPassWord()]
+   var params=[phone,userName,Base64.encode(randPassWord())]
 
    var sql='insert into user values(?,?,?)'
   

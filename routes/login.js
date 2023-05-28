@@ -26,7 +26,8 @@ var deleteCode = require("../my_modules/deleteCode")
 var rigist = require("../my_modules/rigist")
 
 
-var getData = require("../my_modules/getData")//根据手机号获取用户数据
+var getData = require("../my_modules/getData");//根据手机号获取用户数据
+const { json } = require('express');
 
 
 /* GET login listing. */
@@ -118,16 +119,17 @@ router.post('/postCode', matchFormateCode, function (req, res, next) {//验证�
             if (val) {//如果是已注册的用户
                 deleteCode(phone)//验证成功后清除数据
                 getData(phone).then((data) => {
+                    res.cookie("userdata",JSON.stringify(data),{maxAge:1000*60*2020})//返回cookie并且设置有效时间
                     res.json({
                         staus: 200,
                         msg: "验证成功",
-                        successLogin: true,
-                        userData: data
+                        successLogin: true   
                     })
                 })
             } else {
                 rigist(phone).then((val) => {
                     getData(phone).then((data) => {
+                        res.cookie("userdata",JSON.stringify(data),{maxAge:1000*60*2020})//返回cookie并且设置有效时间
                         res.json({
                             staus: 200,
                             msg: "验证成功",
